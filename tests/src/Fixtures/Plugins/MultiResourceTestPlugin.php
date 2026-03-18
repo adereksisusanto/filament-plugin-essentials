@@ -11,6 +11,7 @@ use BezhanSalleh\PluginEssentials\Concerns\Plugin\WithMultipleResourceSupport;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Posts\PostResource;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\UserResource;
 use Filament\Contracts\Plugin;
+use Filament\Facades\Filament;
 use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
 
@@ -50,7 +51,7 @@ class MultiResourceTestPlugin implements Plugin
 
     public static function get(): ?static
     {
-        return \Filament\Facades\Filament::getPlugin('multi-forResource-test');
+        return Filament::getPlugin('multi-forResource-test');
     }
 
     public function getId(): string

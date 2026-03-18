@@ -9,8 +9,8 @@ use BezhanSalleh\PluginEssentials\Concerns\Resource\BelongsToTenant;
 use BezhanSalleh\PluginEssentials\Concerns\Resource\HasGlobalSearch;
 use BezhanSalleh\PluginEssentials\Concerns\Resource\HasLabels;
 use BezhanSalleh\PluginEssentials\Concerns\Resource\HasNavigation;
+use BezhanSalleh\PluginEssentials\Tests\Fixtures\EssentialPlugin;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Models\User;
-use BezhanSalleh\PluginEssentials\Tests\Fixtures\Plugins\FullFeaturesTestPlugin;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\Pages\CreateUser;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\Pages\EditUser;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\Pages\ListUsers;
@@ -24,18 +24,17 @@ use Filament\Tables\Table;
 
 class UserResource extends Resource
 {
-    // use BelongsToParent;
+    use BelongsToParent;
     use BelongsToTenant;
-
-    // use HasGlobalSearch;
+    use HasGlobalSearch;
     use HasLabels;
-    // use HasNavigation;
+    use HasNavigation;
 
     protected static ?string $model = User::class;
 
-    public static function getEssentialsPlugin(): ?FullFeaturesTestPlugin
+    public static function getEssentialsPlugin(): ?EssentialPlugin
     {
-        return FullFeaturesTestPlugin::get();
+        return EssentialPlugin::get();
     }
 
     public static function form(Schema $schema): Schema

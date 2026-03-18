@@ -18,6 +18,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Workbench\App\Filament\Resources\Users\UserResource;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -34,7 +35,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Resources'), for: 'Workbench\App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'Workbench\App\Filament\Pages')
             ->resources([
-                \Workbench\App\Filament\Resources\Users\UserResource::class,
+                UserResource::class,
             ])
             ->pages([
                 Dashboard::class,

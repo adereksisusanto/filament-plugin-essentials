@@ -10,6 +10,7 @@ use BezhanSalleh\PluginEssentials\Concerns\Plugin\WithMultipleResourceSupport;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Posts\EnhancedTestPostResource;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\EnhancedTestUserResource;
 use Filament\Contracts\Plugin;
+use Filament\Facades\Filament;
 use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
 
@@ -63,7 +64,7 @@ class EnhancedDefaultsTestPlugin implements Plugin
 
     public static function get(): ?static
     {
-        return \Filament\Facades\Filament::getPlugin('enhanced-defaults-test');
+        return Filament::getPlugin('enhanced-defaults-test');
     }
 
     public function getId(): string

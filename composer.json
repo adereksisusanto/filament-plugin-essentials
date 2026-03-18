@@ -1,5 +1,6 @@
 {
     "name": "bezhansalleh/filament-plugin-essentials",
+    "version": "1.1.0",
     "description": "A collection of essential traits that streamline Filament plugin development by taking care of the boilerplate, so you can focus on shipping real features faster",
     "keywords": [
         "Bezhan Salleh",

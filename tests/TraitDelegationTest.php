@@ -1,6 +1,6 @@
 <?php
 
-use BezhanSalleh\PluginEssentials\Tests\Fixtures\Plugins\FullFeaturesTestPlugin;
+use BezhanSalleh\PluginEssentials\Tests\Fixtures\EssentialPlugin;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Plugins\NoDefaultsTestPlugin;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Posts\PostResource;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\UserResource;
@@ -14,51 +14,53 @@ describe('Trait Delegation with Real Plugin Registration', function () {
     it('delegates HasLabels when used and fallbacks to defaults', function () {
         $this->panel
             ->plugins([
-                FullFeaturesTestPlugin::make(),
+                EssentialPlugin::make(),
             ]);
         $resource = $this->panel->getResources()[0];
 
-        expect($resource::getModelLabel())->toBe('user');
-        expect($resource::getPluralModelLabel())->toBe('users');
-        expect($resource::getRecordTitleAttribute())->toBeNull();
-        expect($resource::hasTitleCaseModelLabel())->toBeTrue();
+        // EssentialPlugin has plugin defaults: modelLabel via getDefaultModelLabel() method,
+        // pluralModelLabel, recordTitleAttribute, hasTitleCaseModelLabel via getPluginDefaults()
+        expect($resource::getModelLabel())->toBe('Essential Item (Method)')
+            ->and($resource::getPluralModelLabel())->toBe('Essential Items')
+            ->and($resource::getRecordTitleAttribute())->toBe('id')
+            ->and($resource::hasTitleCaseModelLabel())->toBeFalse();
 
         $this->panel
             ->plugins([
-                FullFeaturesTestPlugin::make()
+                EssentialPlugin::make()
                     ->modelLabel('Full Item')
                     ->pluralModelLabel('Full Items')
                     ->recordTitleAttribute('name')
-                // ->titleCaseModelLabel(false)
-                ,
+                    ->titleCaseModelLabel(true),
             ]);
 
-        expect($resource::getModelLabel())->toBe('Full Item');
-        expect($resource::getPluralModelLabel())->toBe('Full Items');
-        expect($resource::getRecordTitleAttribute())->toBe('name');
-        expect($resource::hasTitleCaseModelLabel())->toBeTrue();
+        expect($resource::getModelLabel())->toBe('Full Item')
+            ->and($resource::getPluralModelLabel())->toBe('Full Items')
+            ->and($resource::getRecordTitleAttribute())->toBe('name')
+            ->and($resource::hasTitleCaseModelLabel())->toBeTrue();
     });
 
     it('delegates to plugin when plugin has defaults', function () {
 
         $this->panel
             ->plugins([
-                FullFeaturesTestPlugin::make(),
+                EssentialPlugin::make(),
             ]);
         $userResource = $this->panel->getResources()[0];
 
-        expect($userResource::getTenantRelationshipName())->toBe('users');
-        expect($userResource::getTenantOwnershipRelationshipName())->toBeEmpty();
+        // EssentialPlugin has no tenant defaults, so Filament defaults apply
+        expect($userResource::getTenantRelationshipName())->toBe('users')
+            ->and($userResource::getTenantOwnershipRelationshipName())->toBeEmpty();
 
         $this->panel
             ->plugins([
-                FullFeaturesTestPlugin::make()
+                EssentialPlugin::make()
                     ->tenantRelationshipName('organization')
                     ->tenantOwnershipRelationshipName('owner'),
             ]);
 
-        expect($userResource::getTenantRelationshipName())->toBe('organization');
-        expect($userResource::getTenantOwnershipRelationshipName())->toBe('owner');
+        expect($userResource::getTenantRelationshipName())->toBe('organization')
+            ->and($userResource::getTenantOwnershipRelationshipName())->toBe('owner');
     });
 
     // it('falls back to Filament core when plugin has no defaults (BelongsToTenant)', function () {

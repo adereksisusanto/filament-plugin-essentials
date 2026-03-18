@@ -1,9 +1,11 @@
 <?php
 
 use BezhanSalleh\PluginEssentials\PluginEssentialsServiceProvider;
+use Workbench\App\Providers\Filament\AdminPanelProvider;
+use Workbench\App\Providers\WorkbenchServiceProvider;
 
 return [
-    \Workbench\App\Providers\WorkbenchServiceProvider::class,
-    \Workbench\App\Providers\Filament\AdminPanelProvider::class,
+    WorkbenchServiceProvider::class,
+    AdminPanelProvider::class,
     PluginEssentialsServiceProvider::class,
 ];
