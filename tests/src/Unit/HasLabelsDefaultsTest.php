@@ -2,9 +2,13 @@
 
 declare(strict_types=1);
 
+use BezhanSalleh\PluginEssentials\Concerns\Plugin\HasLabels;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\EssentialPlugin;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\UserResource;
+use Filament\Contracts\Plugin;
 use Filament\Facades\Filament;
+use Filament\Panel;
+use Filament\Support\Concerns\EvaluatesClosures;
 
 beforeEach(function () {
     $this->panel = Filament::getCurrentOrDefaultPanel();
@@ -86,19 +90,19 @@ describe('HasLabels Trait - 3-Tier Default System', function () {
         // and without overriding the getPluginDefaults method
         $this->panel
             ->plugins([
-                new class implements \Filament\Contracts\Plugin
+                new class implements Plugin
                 {
-                    use BezhanSalleh\PluginEssentials\Concerns\Plugin\HasLabels;
-                    use \Filament\Support\Concerns\EvaluatesClosures;
+                    use EvaluatesClosures;
+                    use HasLabels;
 
                     public function getId(): string
                     {
                         return 'no-defaults-plugin';
                     }
 
-                    public function register(\Filament\Panel $panel): void {}
+                    public function register(Panel $panel): void {}
 
-                    public function boot(\Filament\Panel $panel): void {}
+                    public function boot(Panel $panel): void {}
 
                     public static function make(): static
                     {
@@ -107,7 +111,7 @@ describe('HasLabels Trait - 3-Tier Default System', function () {
 
                     public static function get(): ?static
                     {
-                        return \Filament\Facades\Filament::getPlugin('no-defaults-plugin');
+                        return Filament::getPlugin('no-defaults-plugin');
                     }
                 },
             ]);

@@ -22,7 +22,6 @@ use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase as Orchestra;
-use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
 
 use function Orchestra\Testbench\workbench_path;
 
@@ -50,21 +49,16 @@ class TestCase extends Orchestra
      */
     protected function defineDatabaseMigrations()
     {
-        $this->loadMigrationsFrom(
-            workbench_path('database/migrations')
-        );
+        $this->loadMigrationsFrom(workbench_path('database/migrations'));
 
         // Load test-specific migrations
-        $this->loadMigrationsFrom(
-            __DIR__ . '/../database/migrations'
-        );
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 
     protected function getPackageProviders($app): array
     {
         $providers = [
             ActionsServiceProvider::class,
-            BladeCaptureDirectiveServiceProvider::class,
             BladeHeroiconsServiceProvider::class,
             BladeIconsServiceProvider::class,
             FilamentServiceProvider::class,

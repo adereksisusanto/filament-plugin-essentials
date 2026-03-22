@@ -11,7 +11,6 @@ use BezhanSalleh\PluginEssentials\Concerns\Resource\HasLabels;
 use BezhanSalleh\PluginEssentials\Concerns\Resource\HasNavigation;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\EssentialPlugin;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Models\User;
-use BezhanSalleh\PluginEssentials\Tests\Fixtures\Plugins\FullFeaturesTestPlugin;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\Pages\CreateUser;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\Pages\EditUser;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\Pages\ListUsers;

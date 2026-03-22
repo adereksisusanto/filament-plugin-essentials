@@ -10,6 +10,7 @@ use BezhanSalleh\PluginEssentials\Concerns\Plugin\HasNavigation;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\FullFeaturesTestUserResource;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\UserResource;
 use Filament\Contracts\Plugin;
+use Filament\Facades\Filament;
 use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
 
@@ -32,7 +33,7 @@ class FullFeaturesTestPlugin implements Plugin
 
     public static function get(): ?static
     {
-        return \Filament\Facades\Filament::getPlugin('full-features-test');
+        return Filament::getPlugin('full-features-test');
     }
 
     public function getId(): string
@@ -51,5 +52,12 @@ class FullFeaturesTestPlugin implements Plugin
     public function boot(Panel $panel): void
     {
         //
+    }
+
+    protected function getPluginDefaults(): array
+    {
+        return [
+            'globalSearchResultsLimit' => 25,
+        ];
     }
 }

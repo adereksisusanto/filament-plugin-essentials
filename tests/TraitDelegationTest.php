@@ -1,6 +1,6 @@
 <?php
 
-use BezhanSalleh\PluginEssentials\Tests\Fixtures\Plugins\FullFeaturesTestPlugin;
+use BezhanSalleh\PluginEssentials\Tests\Fixtures\EssentialPlugin;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Plugins\NoDefaultsTestPlugin;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Posts\PostResource;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\FullFeaturesTestUserResource;
@@ -15,7 +15,7 @@ describe('Trait Delegation with Real Plugin Registration', function () {
     it('delegates HasLabels when used and fallbacks to defaults', function () {
         $this->panel
             ->plugins([
-                FullFeaturesTestPlugin::make(),
+                EssentialPlugin::make(),
             ]);
 
         /** @var class-string<UserResource> $resource */
@@ -29,12 +29,11 @@ describe('Trait Delegation with Real Plugin Registration', function () {
 
         $this->panel
             ->plugins([
-                FullFeaturesTestPlugin::make()
+                EssentialPlugin::make()
                     ->modelLabel('Full Item')
                     ->pluralModelLabel('Full Items')
                     ->recordTitleAttribute('name')
-                // ->titleCaseModelLabel(false)
-                ,
+                    ->titleCaseModelLabel(true),
             ]);
 
         /** @var class-string<FullFeaturesTestUserResource> $resource */
@@ -51,16 +50,17 @@ describe('Trait Delegation with Real Plugin Registration', function () {
 
         $this->panel
             ->plugins([
-                FullFeaturesTestPlugin::make(),
+                EssentialPlugin::make(),
             ]);
         $userResource = $this->panel->getResources()[0];
 
-        expect($userResource::getTenantRelationshipName())->toBe('users');
-        expect($userResource::getTenantOwnershipRelationshipName())->toBeEmpty();
+        // EssentialPlugin has no tenant defaults, so Filament defaults apply
+        expect($userResource::getTenantRelationshipName())->toBe('users')
+            ->and($userResource::getTenantOwnershipRelationshipName())->toBeEmpty();
 
         $this->panel
             ->plugins([
-                FullFeaturesTestPlugin::make()
+                EssentialPlugin::make()
                     ->tenantRelationshipName('organization')
                     ->tenantOwnershipRelationshipName('owner'),
             ]);

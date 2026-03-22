@@ -9,6 +9,7 @@ use BezhanSalleh\PluginEssentials\Concerns\Plugin\WithMultipleResourceSupport;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Posts\LegacyTestPostResource;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\LegacyTestUserResource;
 use Filament\Contracts\Plugin;
+use Filament\Facades\Filament;
 use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
 
@@ -49,7 +50,7 @@ class LegacyStructureTestPlugin implements Plugin
 
     public static function get(): ?static
     {
-        return \Filament\Facades\Filament::getPlugin('legacy-structure-test');
+        return Filament::getPlugin('legacy-structure-test');
     }
 
     public function getId(): string

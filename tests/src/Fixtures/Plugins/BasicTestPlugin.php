@@ -5,6 +5,7 @@ namespace BezhanSalleh\PluginEssentials\Tests\Fixtures\Plugins;
 use BezhanSalleh\PluginEssentials\Concerns\Plugin\HasLabels;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\UserResource;
 use Filament\Contracts\Plugin;
+use Filament\Facades\Filament;
 use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
 
@@ -33,7 +34,7 @@ class BasicTestPlugin implements Plugin
 
     public static function get(): ?static
     {
-        return \Filament\Facades\Filament::getPlugin('basic-test');
+        return Filament::getPlugin('basic-test');
     }
 
     public function getId(): string
