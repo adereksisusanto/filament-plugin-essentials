@@ -2,6 +2,21 @@
 
 All notable changes to `filament-plugin-essentials` will be documented in this file.
 
+## 1.2.0 - 2026-03-22
+
+### What's Changed
+
+* Fix tests by @howdu in https://github.com/bezhanSalleh/filament-plugin-essentials/pull/13
+* Bump ramsey/composer-install from 3 to 4 by @dependabot[bot] in https://github.com/bezhanSalleh/filament-plugin-essentials/pull/14
+* Laravel 13 support by @aligulzar729 in https://github.com/bezhanSalleh/filament-plugin-essentials/pull/15
+
+### New Contributors
+
+* @howdu made their first contribution in https://github.com/bezhanSalleh/filament-plugin-essentials/pull/13
+* @aligulzar729 made their first contribution in https://github.com/bezhanSalleh/filament-plugin-essentials/pull/15
+
+**Full Changelog**: https://github.com/bezhanSalleh/filament-plugin-essentials/compare/1.1.0...1.2.0
+
 ## 1.1.0 - 2026-01-19
 
 ### What's Changed
