@@ -7,6 +7,7 @@ use BezhanSalleh\PluginEssentials\Concerns\Plugin\BelongsToTenant;
 use BezhanSalleh\PluginEssentials\Concerns\Plugin\HasGlobalSearch;
 use BezhanSalleh\PluginEssentials\Concerns\Plugin\HasLabels;
 use BezhanSalleh\PluginEssentials\Concerns\Plugin\HasNavigation;
+use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\FullFeaturesTestUserResource;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\UserResource;
 use Filament\Contracts\Plugin;
 use Filament\Facades\Filament;
@@ -44,6 +45,7 @@ class FullFeaturesTestPlugin implements Plugin
     {
         $panel->resources([
             UserResource::class,
+            FullFeaturesTestUserResource::class,
         ]);
     }
 

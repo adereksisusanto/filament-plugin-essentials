@@ -18,6 +18,7 @@ use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\Pages\ViewUser;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\Schemas\UserForm;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\Schemas\UserInfolist;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\Tables\UsersTable;
+use Filament\Contracts\Plugin;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
@@ -32,7 +33,7 @@ class UserResource extends Resource
 
     protected static ?string $model = User::class;
 
-    public static function getEssentialsPlugin(): ?EssentialPlugin
+    public static function getEssentialsPlugin(): Plugin
     {
         return EssentialPlugin::get();
     }
