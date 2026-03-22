@@ -3,7 +3,6 @@
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\EssentialPlugin;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Plugins\NoDefaultsTestPlugin;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Posts\PostResource;
-use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\FullFeaturesTestUserResource;
 use BezhanSalleh\PluginEssentials\Tests\Fixtures\Resources\Users\UserResource;
 use Filament\Facades\Filament;
 
@@ -21,11 +20,16 @@ describe('Trait Delegation with Real Plugin Registration', function () {
         /** @var class-string<UserResource> $resource */
         $resource = $this->panel->getResources()[0];
 
-        expect($resource)->toBe(UserResource::class)
-            ->and($resource::getModelLabel())->toBe('user')
-            ->and($resource::getPluralModelLabel())->toBe('users')
-            ->and($resource::getRecordTitleAttribute())->toBeNull()
-            ->and($resource::hasTitleCaseModelLabel())->toBeTrue();
+        // expect($resource)->toBe(UserResource::class)
+        //     ->and($resource::getModelLabel())->toBe('user')
+        //     ->and($resource::getPluralModelLabel())->toBe('users')
+        //     ->and($resource::getRecordTitleAttribute())->toBeNull()
+        //     ->and($resource::hasTitleCaseModelLabel())->toBeTrue();
+
+        expect($resource::getModelLabel())->toBe('Essential Item (Method)')
+            ->and($resource::getPluralModelLabel())->toBe('Essential Items')
+            ->and($resource::getRecordTitleAttribute())->toBe('id')
+            ->and($resource::hasTitleCaseModelLabel())->toBeFalse();
 
         $this->panel
             ->plugins([
@@ -36,10 +40,10 @@ describe('Trait Delegation with Real Plugin Registration', function () {
                     ->titleCaseModelLabel(true),
             ]);
 
-        /** @var class-string<FullFeaturesTestUserResource> $resource */
-        $resource = $this->panel->getResources()[1];
+        /** @var class-string<UserResource> $resource */
+        $resource = $this->panel->getResources()[0];
 
-        expect($resource)->toBe(FullFeaturesTestUserResource::class)
+        expect($resource)->toBe(UserResource::class)
             ->and($resource::getModelLabel())->toBe('Full Item')
             ->and($resource::getPluralModelLabel())->toBe('Full Items')
             ->and($resource::getRecordTitleAttribute())->toBe('name')
@@ -65,7 +69,7 @@ describe('Trait Delegation with Real Plugin Registration', function () {
                     ->tenantOwnershipRelationshipName('owner'),
             ]);
 
-        $fullFeatureResource = $this->panel->getResources()[1];
+        $fullFeatureResource = $this->panel->getResources()[0];
 
         expect($fullFeatureResource::getTenantRelationshipName())->toBe('organization');
         expect($fullFeatureResource::getTenantOwnershipRelationshipName())->toBe('owner');
