@@ -90,6 +90,7 @@ trait HasGlobalSearch
     public function isGloballySearchable(?string $resourceClass = null): bool
     {
         $result = $this->getPropertyWithDefaults('isGloballySearchable', $resourceClass);
+
         return $result ?? true; // Default to true only if no value found
     }
 
